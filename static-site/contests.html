@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Join free fantasy cricket contests on SDSURABHI. Browse live and upcoming matches, create teams, and compete with other players.">
     <title>Contests - SDSURABHI | Free Fantasy Cricket</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.webp">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -136,7 +136,7 @@
         <div class="header-main">
             <div class="container">
                 <a href="index.html" class="logo">
-                    <img src="images/logo.png" alt="SDSURABHI Logo">
+                    <img src="images/logo.webp" alt="SDSURABHI Logo">
                     <span class="logo-text">SDS<span>URABHI</span></span>
                 </a>
                 <nav>
@@ -262,8 +262,8 @@
         }
         
         function renderMatchCard(match) {
-            const team1Img = match.t1img || 'images/default-team.png';
-            const team2Img = match.t2img || 'images/default-team.png';
+            const team1Img = match.t1img || 'images/default-team.webp';
+            const team2Img = match.t2img || 'images/default-team.webp';
             const isLive = match.ms === 'live';
             const matchType = getMatchType(match.matchType);
             
@@ -281,13 +281,13 @@
                     <div class="match-card-body">
                         <div class="teams-display">
                             <div class="team-info">
-                                <img src="${team1Img}" alt="${match.t1}" onerror="this.src='images/default-team.png'">
+                                <img src="${team1Img}" alt="${match.t1}" onerror="this.src='images/default-team.webp'">
                                 <div class="team-name">${match.t1 || 'Team 1'}</div>
                                 ${match.t1s ? `<div class="team-score">${match.t1s}</div>` : ''}
                             </div>
                             <div class="vs-circle">VS</div>
                             <div class="team-info">
-                                <img src="${team2Img}" alt="${match.t2}" onerror="this.src='images/default-team.png'">
+                                <img src="${team2Img}" alt="${match.t2}" onerror="this.src='images/default-team.webp'">
                                 <div class="team-name">${match.t2 || 'Team 2'}</div>
                                 ${match.t2s ? `<div class="team-score">${match.t2s}</div>` : ''}
                             </div>
@@ -326,7 +326,7 @@
             if (!matches || matches.length === 0) {
                 grid.innerHTML = `
                     <div class="no-matches" style="grid-column: 1 / -1;">
-                        <img src="images/default-team.png" alt="No matches">
+                        <img src="images/default-team.webp" alt="No matches">
                         <h3>No Matches Found</h3>
                         <p>There are no matches matching your filters. Try changing the filters or check back later.</p>
                         <button class="btn btn-primary" onclick="resetFilters()">Reset Filters</button>
@@ -426,7 +426,7 @@
                 console.error('Error:', error);
                 grid.innerHTML = `
                     <div class="no-matches" style="grid-column: 1 / -1;">
-                        <img src="images/default-team.png" alt="Error">
+                        <img src="images/default-team.webp" alt="Error">
                         <h3>Unable to Load Matches</h3>
                         <p>Please check your connection and try again.</p>
                         <button class="btn btn-primary" onclick="fetchMatches()">Retry</button>

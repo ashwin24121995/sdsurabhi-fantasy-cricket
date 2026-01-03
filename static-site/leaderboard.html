@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="View fantasy cricket leaderboard rankings on SDSURABHI. See top players, weekly, monthly, and all-time rankings.">
     <title>Leaderboard - SDSURABHI | Free Fantasy Cricket</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.webp">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -145,7 +145,7 @@
         <div class="header-main">
             <div class="container">
                 <a href="index.html" class="logo">
-                    <img src="images/logo.png" alt="SDSURABHI Logo">
+                    <img src="images/logo.webp" alt="SDSURABHI Logo">
                     <span class="logo-text">SDS<span>URABHI</span></span>
                 </a>
                 <nav>
@@ -179,22 +179,22 @@
             <!-- Stats Cards -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <img src="images/icon-user.png" alt="Players">
+                    <img src="images/icon-user.webp" alt="Players">
                     <div class="number">15,420</div>
                     <div class="label">Total Players</div>
                 </div>
                 <div class="stat-card">
-                    <img src="images/trophy.png" alt="Contests">
+                    <img src="images/trophy.webp" alt="Contests">
                     <div class="number">2,847</div>
                     <div class="label">Contests Played</div>
                 </div>
                 <div class="stat-card">
-                    <img src="images/default-team.png" alt="Teams">
+                    <img src="images/default-team.webp" alt="Teams">
                     <div class="number">48,750</div>
                     <div class="label">Teams Created</div>
                 </div>
                 <div class="stat-card">
-                    <img src="images/rank-gold.png" alt="Points">
+                    <img src="images/rank-gold.webp" alt="Points">
                     <div class="number">1.2M</div>
                     <div class="label">Total Points Earned</div>
                 </div>
@@ -210,7 +210,7 @@
             <!-- Top 3 Podium -->
             <div class="top-three" id="topThree">
                 <div class="podium-item second">
-                    <img src="images/icon-user.png" alt="2nd Place" class="podium-avatar">
+                    <img src="images/icon-user.webp" alt="2nd Place" class="podium-avatar">
                     <div class="podium-rank">2</div>
                     <div class="podium-base">
                         <div class="podium-name">Rahul S.</div>
@@ -218,7 +218,7 @@
                     </div>
                 </div>
                 <div class="podium-item first">
-                    <img src="images/icon-user.png" alt="1st Place" class="podium-avatar">
+                    <img src="images/icon-user.webp" alt="1st Place" class="podium-avatar">
                     <div class="podium-rank">1</div>
                     <div class="podium-base">
                         <div class="podium-name">Vikas K.</div>
@@ -226,7 +226,7 @@
                     </div>
                 </div>
                 <div class="podium-item third">
-                    <img src="images/icon-user.png" alt="3rd Place" class="podium-avatar">
+                    <img src="images/icon-user.webp" alt="3rd Place" class="podium-avatar">
                     <div class="podium-rank">3</div>
                     <div class="podium-base">
                         <div class="podium-name">Amit P.</div>
@@ -341,7 +341,7 @@
             if (data.length >= 3) {
                 topThree.innerHTML = `
                     <div class="podium-item second">
-                        <img src="images/icon-user.png" alt="2nd Place" class="podium-avatar">
+                        <img src="images/icon-user.webp" alt="2nd Place" class="podium-avatar">
                         <div class="podium-rank">2</div>
                         <div class="podium-base">
                             <div class="podium-name">${data[1].name}</div>
@@ -349,7 +349,7 @@
                         </div>
                     </div>
                     <div class="podium-item first">
-                        <img src="images/icon-user.png" alt="1st Place" class="podium-avatar">
+                        <img src="images/icon-user.webp" alt="1st Place" class="podium-avatar">
                         <div class="podium-rank">1</div>
                         <div class="podium-base">
                             <div class="podium-name">${data[0].name}</div>
@@ -357,7 +357,7 @@
                         </div>
                     </div>
                     <div class="podium-item third">
-                        <img src="images/icon-user.png" alt="3rd Place" class="podium-avatar">
+                        <img src="images/icon-user.webp" alt="3rd Place" class="podium-avatar">
                         <div class="podium-rank">3</div>
                         <div class="podium-base">
                             <div class="podium-name">${data[2].name}</div>
@@ -374,7 +374,7 @@
                         <div class="rank-badge ${getRankBadgeClass(player.rank)}">${player.rank}</div>
                     </div>
                     <div class="player-cell">
-                        <img src="images/icon-user.png" alt="${player.name}">
+                        <img src="images/icon-user.webp" alt="${player.name}">
                         <div>
                             <div class="name">${player.name}</div>
                             <div class="username">${player.username}</div>

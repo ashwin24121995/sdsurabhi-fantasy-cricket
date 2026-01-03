@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Create your fantasy cricket team on SDSURABHI. Select players, pick captain and vice-captain, and join free contests.">
     <title>Create Team - SDSURABHI | Free Fantasy Cricket</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.webp">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -156,7 +156,7 @@
         <div class="header-main">
             <div class="container">
                 <a href="index.html" class="logo">
-                    <img src="images/logo.png" alt="SDSURABHI">
+                    <img src="images/logo.webp" alt="SDSURABHI">
                     <span class="logo-text">SDS<span>URABHI</span></span>
                 </a>
                 <div>
@@ -185,7 +185,7 @@
                 <!-- Players Selection -->
                 <div class="players-section">
                     <h2 class="section-title">
-                        <img src="images/player-batsman.png" alt="Players" style="width: 30px;">
+                        <img src="images/player-batsman.webp" alt="Players" style="width: 30px;">
                         Select Players (11)
                     </h2>
                     
@@ -242,12 +242,12 @@
                             <div class="captain-title">Captain & Vice-Captain</div>
                             <div class="captain-slots">
                                 <div class="captain-slot" id="captainSlot" onclick="selectCaptain()">
-                                    <img src="images/badge-captain.png" alt="C" style="width: 30px; height: 30px;">
+                                    <img src="images/badge-captain.webp" alt="C" style="width: 30px; height: 30px;">
                                     <div class="badge">CAPTAIN (2x)</div>
                                     <div class="name" id="captainName">Select</div>
                                 </div>
                                 <div class="captain-slot" id="vcSlot" onclick="selectVC()">
-                                    <img src="images/badge-vice-captain.png" alt="VC" style="width: 30px; height: 30px;">
+                                    <img src="images/badge-vice-captain.webp" alt="VC" style="width: 30px; height: 30px;">
                                     <div class="badge">VICE-C (1.5x)</div>
                                     <div class="name" id="vcName">Select</div>
                                 </div>
@@ -286,7 +286,7 @@
     <!-- Success Modal -->
     <div class="modal" id="successModal">
         <div class="modal-content">
-            <img src="images/trophy.png" alt="Success" style="width: 80px; margin-bottom: 15px;">
+            <img src="images/trophy.webp" alt="Success" style="width: 80px; margin-bottom: 15px;">
             <h3>Team Created Successfully!</h3>
             <p>Your fantasy team has been created. Good luck!</p>
             <div class="modal-buttons">
@@ -436,7 +436,7 @@
             } else {
                 listEl.innerHTML = selectedPlayers.map(p => `
                     <div class="selected-player">
-                        <img src="${p.playerImg || 'images/icon-user.png'}" alt="${p.name}" onerror="this.src='images/icon-user.png'">
+                        <img src="${p.playerImg || 'images/icon-user.webp'}" alt="${p.name}" onerror="this.src='images/icon-user.webp'">
                         <span class="name">${p.name}${captain && captain.id === p.id ? '<span class="captain-badge">C</span>' : ''}${viceCaptain && viceCaptain.id === p.id ? '<span class="captain-badge" style="background: var(--primary-blue);">VC</span>' : ''}</span>
                         <span class="remove" onclick="togglePlayer(${JSON.stringify(p).replace(/"/g, '&quot;')})">×</span>
                     </div>
@@ -477,7 +477,7 @@
                 const isSelected = selectedPlayers.find(p => p.id === player.id);
                 const canSelect = canSelectPlayer(player);
                 const role = getPlayerRole(player.role);
-                const roleImg = role === 'wk' ? 'player-keeper.png' : role === 'bowl' ? 'player-bowler.png' : role === 'ar' ? 'player-allrounder.png' : 'player-batsman.png';
+                const roleImg = role === 'wk' ? 'player-keeper.webp' : role === 'bowl' ? 'player-bowler.webp' : role === 'ar' ? 'player-allrounder.webp' : 'player-batsman.webp';
                 
                 return `
                     <div class="player-card ${isSelected ? 'selected' : ''} ${!isSelected && !canSelect ? 'disabled' : ''}" onclick="${!isSelected && !canSelect ? '' : `togglePlayer(${JSON.stringify(player).replace(/"/g, '&quot;')})`}">
@@ -524,7 +524,7 @@
             const listEl = document.getElementById('modalPlayersList');
             listEl.innerHTML = selectedPlayers.map(p => `
                 <div style="display: flex; align-items: center; padding: 10px; background: var(--light-gray); border-radius: 8px; margin-bottom: 8px; cursor: pointer;" onclick="setCaptainOrVC('${p.id}')">
-                    <img src="${p.playerImg || 'images/icon-user.png'}" alt="${p.name}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" onerror="this.src='images/icon-user.png'">
+                    <img src="${p.playerImg || 'images/icon-user.webp'}" alt="${p.name}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" onerror="this.src='images/icon-user.webp'">
                     <span style="flex: 1; font-weight: 600;">${p.name}</span>
                 </div>
             `).join('');
@@ -613,19 +613,19 @@
         
         function renderMatchInfo() {
             const isLive = matchData.ms === 'live' || matchData.matchStarted;
-            const team1Img = matchData.t1img || matchData.teamInfo?.[0]?.img || 'images/default-team.png';
-            const team2Img = matchData.t2img || matchData.teamInfo?.[1]?.img || 'images/default-team.png';
+            const team1Img = matchData.t1img || matchData.teamInfo?.[0]?.img || 'images/default-team.webp';
+            const team2Img = matchData.t2img || matchData.teamInfo?.[1]?.img || 'images/default-team.webp';
             
             document.getElementById('matchInfoCard').innerHTML = `
                 <div class="match-teams-header">
                     <div class="team-header">
-                        <img src="${team1Img}" alt="${matchData.t1 || matchData.teams?.[0]}" onerror="this.src='images/default-team.png'">
+                        <img src="${team1Img}" alt="${matchData.t1 || matchData.teams?.[0]}" onerror="this.src='images/default-team.webp'">
                         <h3>${matchData.t1 || matchData.teams?.[0] || 'Team 1'}</h3>
                         ${matchData.t1s || matchData.score?.[0]?.r ? `<div class="score">${matchData.t1s || matchData.score?.[0]?.r + '/' + matchData.score?.[0]?.w}</div>` : ''}
                     </div>
                     <div class="vs-badge-large">VS</div>
                     <div class="team-header">
-                        <img src="${team2Img}" alt="${matchData.t2 || matchData.teams?.[1]}" onerror="this.src='images/default-team.png'">
+                        <img src="${team2Img}" alt="${matchData.t2 || matchData.teams?.[1]}" onerror="this.src='images/default-team.webp'">
                         <h3>${matchData.t2 || matchData.teams?.[1] || 'Team 2'}</h3>
                         ${matchData.t2s || matchData.score?.[1]?.r ? `<div class="score">${matchData.t2s || matchData.score?.[1]?.r + '/' + matchData.score?.[1]?.w}</div>` : ''}
                     </div>
