@@ -130,4 +130,4 @@
 - [x] Copy favicon to project
 - [x] Update homepage to use new images
 - [x] Change stats section to honest non-specific messaging
-- [ ] Push changes to GitHub
+- [x] Push changes to GitHub (via checkpoint)
