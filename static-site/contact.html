@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact SDSURABHI - Get in touch with our support team for any questions or assistance.">
+    <title>Contact Us - SDSURABHI | Free Fantasy Cricket</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a5f;
+            --primary-orange: #ff6b35;
+            --light-blue: #e8f4fc;
+            --dark-blue: #0d1f33;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --success: #10b981;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: var(--light-gray); }
+        a { text-decoration: none; color: var(--primary-orange); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header-top { background: var(--primary-blue); color: var(--white); padding: 8px 0; font-size: 13px; }
+        .header-top-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .free-badge { background: var(--primary-orange); padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+        .header-main { padding: 15px 0; }
+        .header-main .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 50px; }
+        .logo-text { font-size: 24px; font-weight: 700; color: var(--primary-blue); }
+        .logo-text span { color: var(--primary-orange); }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { color: var(--primary-blue); font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--primary-orange); }
+        
+        /* Page Header */
+        .page-header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); padding: 140px 0 60px; color: var(--white); text-align: center; }
+        .page-header h1 { font-size: 42px; margin-bottom: 15px; }
+        .page-header p { font-size: 16px; opacity: 0.9; }
+        
+        /* Content */
+        .content-section { padding: 60px 0; }
+        
+        /* Contact Grid */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
+        
+        /* Contact Info */
+        .contact-info { background: var(--white); border-radius: 16px; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .contact-info h2 { color: var(--primary-blue); margin-bottom: 20px; font-size: 24px; }
+        .contact-info p { color: var(--gray); margin-bottom: 30px; }
+        
+        .info-item { display: flex; gap: 15px; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid var(--light-gray); }
+        .info-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .info-icon { width: 50px; height: 50px; background: var(--light-blue); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .info-content h4 { color: var(--primary-blue); margin-bottom: 5px; }
+        .info-content p { color: var(--gray); font-size: 14px; margin: 0; }
+        .info-content a { color: var(--primary-orange); }
+        
+        /* Contact Form */
+        .contact-form-card { background: var(--white); border-radius: 16px; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .contact-form-card h2 { color: var(--primary-blue); margin-bottom: 10px; font-size: 24px; }
+        .contact-form-card .subtitle { color: var(--gray); margin-bottom: 30px; }
+        
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-blue); font-size: 14px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; border: 2px solid var(--light-gray); border-radius: 10px; font-size: 16px; transition: border-color 0.3s; font-family: inherit; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-orange); }
+        .form-group textarea { resize: vertical; min-height: 150px; }
+        
+        .btn { padding: 16px 30px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.3s; border: none; font-size: 16px; }
+        .btn-primary { background: var(--primary-orange); color: var(--white); }
+        .btn-primary:hover { background: #e55a2b; transform: translateY(-2px); }
+        
+        .success-message { display: none; background: #d1fae5; border: 2px solid var(--success); border-radius: 12px; padding: 20px; text-align: center; margin-top: 20px; }
+        .success-message h4 { color: #065f46; margin-bottom: 10px; }
+        .success-message p { color: #047857; margin: 0; }
+        
+        /* Company Details */
+        .company-details { background: var(--primary-blue); color: var(--white); padding: 60px 0; margin-top: 60px; }
+        .company-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .company-item { text-align: center; }
+        .company-item h4 { color: var(--primary-orange); margin-bottom: 15px; }
+        .company-item p { opacity: 0.9; font-size: 14px; line-height: 1.8; }
+        
+        /* Disclaimer */
+        .disclaimer-box { background: #fef3c7; border: 2px solid #f59e0b; border-radius: 12px; padding: 20px; margin-top: 30px; }
+        .disclaimer-box h4 { color: #92400e; margin-bottom: 10px; }
+        .disclaimer-box p { color: #92400e; font-size: 14px; margin: 0; }
+        
+        /* Footer */
+        footer { background: var(--dark-blue); color: var(--white); padding: 40px 0 20px; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-links { display: flex; gap: 30px; }
+        .footer-links a { color: var(--white); opacity: 0.8; font-size: 14px; }
+        .footer-bottom { padding-top: 20px; text-align: center; font-size: 13px; opacity: 0.7; }
+        
+        @media (max-width: 968px) {
+            nav ul { display: none; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .company-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <span class="free-badge">100% FREE TO PLAY</span>
+                    <span>No Real Money | Skill-Based Gaming | 18+ Only</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="SDSURABHI Logo">
+                    <span class="logo-text">SDS<span>URABHI</span></span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contests.html">Contests</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="how-to-play.html">How to Play</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We're here to help! Get in touch with our support team</p>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <p>Have questions about our free fantasy cricket platform? We're happy to help!</p>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div class="info-content">
+                            <h4>Email Support</h4>
+                            <p><a href="mailto:support@sdsurabhi.com">support@sdsurabhi.com</a></p>
+                            <p>Response within 24-48 hours</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h4>Registered Office</h4>
+                            <p>Ram Achhayvar 48/2, Ayodhya Puri 2,<br>Bijnour, Sarojini Nagar,<br>Lucknow, Uttar Pradesh 226008, India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">🕐</div>
+                        <div class="info-content">
+                            <h4>Support Hours</h4>
+                            <p>Monday - Saturday: 10:00 AM - 7:00 PM IST</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="disclaimer-box">
+                        <h4>⚠️ Important Notice</h4>
+                        <p>SDSURABHI is 100% FREE. We will never ask you for money or payment details. If anyone contacts you claiming to be from SDSURABHI and asks for payment, it is a scam. Please report such incidents immediately.</p>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form-card">
+                    <h2>Send us a Message</h2>
+                    <p class="subtitle">Fill out the form below and we'll get back to you soon</p>
+                    
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number (Optional)</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter phone number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a topic</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="account">Account Issues</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="feedback">Feedback & Suggestions</option>
+                                <option value="complaint">Complaint</option>
+                                <option value="partnership">Business Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" placeholder="Please describe your query in detail..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                    
+                    <div class="success-message" id="successMessage">
+                        <h4>✅ Message Sent Successfully!</h4>
+                        <p>Thank you for contacting us. We'll get back to you within 24-48 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Company Details -->
+    <section class="company-details">
+        <div class="container">
+            <div class="company-grid">
+                <div class="company-item">
+                    <h4>Company Name</h4>
+                    <p>SDSURABHI INFRA PRIVATE LIMITED</p>
+                </div>
+                <div class="company-item">
+                    <h4>CIN Number</h4>
+                    <p>U41002UP2023PTC194590</p>
+                </div>
+                <div class="company-item">
+                    <h4>GST Number</h4>
+                    <p>09ABMCS3759A1Z4</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
+                    <a href="responsible-gaming.html">Responsible Gaming</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div style="font-size: 13px; opacity: 0.8;">
+                    <strong style="color: var(--primary-orange);">100% FREE</strong> | No Real Money | 18+ Only
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2024 SDSURABHI INFRA PRIVATE LIMITED | CIN: U41002UP2023PTC194590 | This is a free-to-play platform.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            // In production, this would send to your backend
+            console.log('Form submitted:', formData);
+            
+            // Show success message
+            document.getElementById('contactForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Reset form after delay
+            setTimeout(() => {
+                document.getElementById('contactForm').reset();
+                document.getElementById('contactForm').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

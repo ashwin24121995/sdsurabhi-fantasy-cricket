@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to play fantasy cricket on SDSURABHI. Step-by-step guide to create teams, join contests, and earn points.">
+    <title>How to Play - SDSURABHI | Free Fantasy Cricket</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a5f;
+            --primary-orange: #ff6b35;
+            --light-blue: #e8f4fc;
+            --dark-blue: #0d1f33;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --success: #10b981;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: var(--white); }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header-top { background: var(--primary-blue); color: var(--white); padding: 8px 0; font-size: 13px; }
+        .header-top-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .free-badge { background: var(--primary-orange); padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+        .header-main { padding: 15px 0; }
+        .header-main .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 50px; }
+        .logo-text { font-size: 24px; font-weight: 700; color: var(--primary-blue); }
+        .logo-text span { color: var(--primary-orange); }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { color: var(--primary-blue); font-weight: 500; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: var(--primary-orange); }
+        .nav-buttons { display: flex; gap: 15px; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; border: none; font-size: 14px; display: inline-block; }
+        .btn-primary { background: var(--primary-orange); color: var(--white); }
+        .btn-outline { background: transparent; border: 2px solid var(--primary-blue); color: var(--primary-blue); }
+        
+        /* Page Header */
+        .page-header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); padding: 140px 0 60px; color: var(--white); text-align: center; }
+        .page-header h1 { font-size: 42px; margin-bottom: 15px; }
+        .page-header p { font-size: 18px; opacity: 0.9; }
+        
+        /* Content Section */
+        .content-section { padding: 60px 0; }
+        
+        /* Steps Section */
+        .steps-container { max-width: 900px; margin: 0 auto; }
+        .step-item { display: flex; gap: 30px; margin-bottom: 50px; align-items: flex-start; }
+        .step-item:nth-child(even) { flex-direction: row-reverse; }
+        .step-number { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-orange), #ff8c5a); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 800; color: var(--white); flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-content h3 { font-size: 24px; color: var(--primary-blue); margin-bottom: 15px; }
+        .step-content p { color: var(--gray); font-size: 16px; margin-bottom: 15px; }
+        .step-content ul { list-style: none; }
+        .step-content li { padding: 8px 0; padding-left: 25px; position: relative; color: var(--gray); }
+        .step-content li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+        .step-image { width: 200px; flex-shrink: 0; }
+        .step-image img { width: 100%; border-radius: 12px; }
+        
+        /* Points Table */
+        .points-section { background: var(--light-gray); padding: 60px 0; }
+        .points-section h2 { text-align: center; color: var(--primary-blue); font-size: 32px; margin-bottom: 40px; }
+        .points-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .points-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .points-card-header { background: var(--primary-blue); color: var(--white); padding: 20px; text-align: center; }
+        .points-card-header h3 { font-size: 20px; }
+        .points-card-body { padding: 20px; }
+        .points-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+        .points-row:last-child { border-bottom: none; }
+        .points-row .action { color: var(--gray); }
+        .points-row .points { font-weight: 700; color: var(--primary-orange); }
+        
+        /* Rules Section */
+        .rules-section { padding: 60px 0; }
+        .rules-section h2 { text-align: center; color: var(--primary-blue); font-size: 32px; margin-bottom: 40px; }
+        .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .rule-card { background: var(--light-blue); border-radius: 12px; padding: 25px; }
+        .rule-card h4 { color: var(--primary-blue); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .rule-card p { color: var(--gray); font-size: 14px; }
+        
+        /* CTA Section */
+        .cta-section { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); padding: 60px 0; text-align: center; color: var(--white); }
+        .cta-section h2 { font-size: 32px; margin-bottom: 15px; }
+        .cta-section p { font-size: 18px; opacity: 0.9; margin-bottom: 30px; }
+        .cta-section .btn { padding: 16px 40px; font-size: 18px; }
+        
+        /* Footer */
+        footer { background: var(--dark-blue); color: var(--white); padding: 40px 0 20px; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-links { display: flex; gap: 30px; }
+        .footer-links a { color: var(--white); opacity: 0.8; font-size: 14px; }
+        .footer-bottom { padding-top: 20px; text-align: center; font-size: 13px; opacity: 0.7; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul, .nav-buttons { display: none; }
+            .page-header { padding: 120px 0 40px; }
+            .page-header h1 { font-size: 28px; }
+            .step-item, .step-item:nth-child(even) { flex-direction: column; text-align: center; }
+            .step-image { width: 150px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <span class="free-badge">100% FREE TO PLAY</span>
+                    <span>No Real Money | Skill-Based Gaming | 18+ Only</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="SDSURABHI Logo">
+                    <span class="logo-text">SDS<span>URABHI</span></span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contests.html">Contests</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="how-to-play.html" class="active">How to Play</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-buttons">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up Free</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>📖 How to Play</h1>
+            <p>Learn fantasy cricket in just 3 simple steps - It's completely free!</p>
+        </div>
+    </section>
+    
+    <!-- Steps Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Select a Match</h3>
+                        <p>Browse through our list of live and upcoming cricket matches. Choose any match you're interested in - all contests are completely free to join!</p>
+                        <ul>
+                            <li>View all live and upcoming cricket matches</li>
+                            <li>Check match details including teams, venue, and timing</li>
+                            <li>Select any match to create your fantasy team</li>
+                            <li>No entry fee required - 100% free to play</li>
+                        </ul>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/step1-select.png" alt="Select Match">
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Create Your Team</h3>
+                        <p>Use your cricket knowledge to build the perfect fantasy team. Select 11 players from both teams within the given constraints.</p>
+                        <ul>
+                            <li>Pick exactly 11 players for your team</li>
+                            <li>Select 1-4 Wicket Keepers</li>
+                            <li>Select 3-6 Batsmen</li>
+                            <li>Select 1-4 All-Rounders</li>
+                            <li>Select 3-6 Bowlers</li>
+                            <li>Choose your Captain (2x points) and Vice-Captain (1.5x points)</li>
+                        </ul>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/step2-team.png" alt="Create Team">
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Compete & Climb the Leaderboard</h3>
+                        <p>Join free contests and watch your team earn points based on real match performance. Climb the leaderboard and showcase your cricket expertise!</p>
+                        <ul>
+                            <li>Join unlimited free contests</li>
+                            <li>Track your team's performance in real-time</li>
+                            <li>Earn points based on player performance</li>
+                            <li>Compete with other cricket fans</li>
+                            <li>Climb weekly, monthly, and all-time leaderboards</li>
+                        </ul>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/step3-compete.png" alt="Compete">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Points System -->
+    <section class="points-section">
+        <div class="container">
+            <h2>Fantasy Points System</h2>
+            <div class="points-grid">
+                <div class="points-card">
+                    <div class="points-card-header">
+                        <h3>🏏 Batting Points</h3>
+                    </div>
+                    <div class="points-card-body">
+                        <div class="points-row">
+                            <span class="action">Run Scored</span>
+                            <span class="points">+1 pt</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">Boundary (4)</span>
+                            <span class="points">+1 pt</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">Six (6)</span>
+                            <span class="points">+2 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">Half Century (50)</span>
+                            <span class="points">+8 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">Century (100)</span>
+                            <span class="points">+16 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">Duck (0 runs)</span>
+                            <span class="points">-2 pts</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="points-card">
+                    <div class="points-card-header">
+                        <h3>🎯 Bowling Points</h3>
+                    </div>
+                    <div class="points-card-body">
+                        <div class="points-row">
+                            <span class="action">Wicket Taken</span>
+                            <span class="points">+25 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">Maiden Over</span>
+                            <span class="points">+8 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">3 Wicket Haul</span>
+                            <span class="points">+4 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">4 Wicket Haul</span>
+                            <span class="points">+8 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">5 Wicket Haul</span>
+                            <span class="points">+16 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">LBW/Bowled Bonus</span>
+                            <span class="points">+8 pts</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="points-card">
+                    <div class="points-card-header">
+                        <h3>🧤 Fielding Points</h3>
+                    </div>
+                    <div class="points-card-body">
+                        <div class="points-row">
+                            <span class="action">Catch Taken</span>
+                            <span class="points">+8 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">Stumping</span>
+                            <span class="points">+12 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">Run Out (Direct)</span>
+                            <span class="points">+12 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">Run Out (Indirect)</span>
+                            <span class="points">+6 pts</span>
+                        </div>
+                        <div class="points-row">
+                            <span class="action">3 Catch Bonus</span>
+                            <span class="points">+4 pts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Rules Section -->
+    <section class="rules-section">
+        <div class="container">
+            <h2>Important Rules</h2>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <h4>📋 Team Selection</h4>
+                    <p>You must select exactly 11 players. Maximum 7 players from any single team. Follow role-wise limits for WK, BAT, AR, and BOWL.</p>
+                </div>
+                <div class="rule-card">
+                    <h4>👑 Captain & Vice-Captain</h4>
+                    <p>Captain earns 2x points and Vice-Captain earns 1.5x points. Choose wisely based on expected performance.</p>
+                </div>
+                <div class="rule-card">
+                    <h4>⏰ Deadline</h4>
+                    <p>Team must be created before the match starts. No changes allowed once the match begins.</p>
+                </div>
+                <div class="rule-card">
+                    <h4>🔄 Substitutions</h4>
+                    <p>If a player doesn't play, they earn 0 points. No automatic substitutions are made.</p>
+                </div>
+                <div class="rule-card">
+                    <h4>🏆 Scoring</h4>
+                    <p>Points are calculated based on actual match performance. Live updates during the match.</p>
+                </div>
+                <div class="rule-card">
+                    <h4>💰 100% Free</h4>
+                    <p>All contests are completely free. No entry fees, no deposits, no real money prizes. Pure skill-based entertainment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start Playing?</h2>
+            <p>Join thousands of cricket fans enjoying free fantasy cricket on SDSURABHI</p>
+            <a href="signup.html" class="btn btn-primary">Create Free Account</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
+                    <a href="responsible-gaming.html">Responsible Gaming</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div style="font-size: 13px; opacity: 0.8;">
+                    <strong style="color: var(--primary-orange);">100% FREE</strong> | No Real Money | 18+ Only
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2024 SDSURABHI INFRA PRIVATE LIMITED | CIN: U41002UP2023PTC194590 | This is a free-to-play platform.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
