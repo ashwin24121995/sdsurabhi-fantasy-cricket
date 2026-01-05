@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for KEMETION - India's 100% free fantasy cricket platform. Create your account and start playing today.">
+    <title>Sign Up - KEMETION | Free Fantasy Cricket</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a5f;
+            --primary-orange: #ff6b35;
+            --light-blue: #e8f4fc;
+            --dark-blue: #0d1f33;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); min-height: 100vh; display: flex; flex-direction: column; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* Header */
+        .auth-header { padding: 20px; text-align: center; }
+        .auth-header a { display: inline-flex; align-items: center; gap: 10px; }
+        .auth-header img { height: 50px; }
+        .auth-header .logo-text { font-size: 24px; font-weight: 700; color: var(--white); }
+        .auth-header .logo-text span { color: var(--primary-orange); }
+        
+        /* Main Content */
+        .auth-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .auth-card { background: var(--white); border-radius: 20px; padding: 40px; width: 100%; max-width: 500px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .auth-card h1 { color: var(--primary-blue); font-size: 28px; margin-bottom: 10px; text-align: center; }
+        .auth-card .subtitle { color: var(--gray); text-align: center; margin-bottom: 30px; }
+        
+        .free-banner { background: linear-gradient(135deg, var(--primary-orange), #ff8c5a); color: var(--white); padding: 12px 20px; border-radius: 10px; text-align: center; margin-bottom: 25px; font-weight: 600; }
+        
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-blue); font-size: 14px; }
+        .form-group input, .form-group select { width: 100%; padding: 14px 16px; border: 2px solid var(--light-gray); border-radius: 10px; font-size: 16px; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-orange); }
+        .form-group .error { color: var(--danger); font-size: 12px; margin-top: 5px; display: none; }
+        .form-group .hint { color: var(--gray); font-size: 12px; margin-top: 5px; }
+        
+        .password-field { position: relative; }
+        .password-toggle { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--gray); }
+        
+        .checkbox-group { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 15px; }
+        .checkbox-group input { width: 20px; height: 20px; margin-top: 2px; }
+        .checkbox-group label { font-size: 13px; color: var(--gray); }
+        .checkbox-group label a { color: var(--primary-orange); }
+        
+        .age-verification { background: #fef3c7; border: 2px solid #f59e0b; border-radius: 10px; padding: 15px; margin-bottom: 20px; }
+        .age-verification h4 { color: #92400e; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .age-verification p { font-size: 13px; color: #92400e; margin: 0; }
+        
+        .state-restriction { background: #fee2e2; border: 2px solid var(--danger); border-radius: 10px; padding: 15px; margin-bottom: 20px; display: none; }
+        .state-restriction h4 { color: #991b1b; margin-bottom: 10px; }
+        .state-restriction p { font-size: 13px; color: #991b1b; margin: 0; }
+        
+        .btn { width: 100%; padding: 16px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.3s; border: none; font-size: 16px; }
+        .btn-primary { background: var(--primary-orange); color: var(--white); }
+        .btn-primary:hover { background: #e55a2b; transform: translateY(-2px); }
+        .btn-primary:disabled { background: var(--gray); cursor: not-allowed; transform: none; }
+        
+        .auth-footer { text-align: center; margin-top: 25px; color: var(--gray); }
+        .auth-footer a { color: var(--primary-orange); font-weight: 600; }
+        
+        /* Compliance Notice */
+        .compliance-notice { background: var(--light-blue); border-radius: 10px; padding: 15px; margin-top: 20px; }
+        .compliance-notice p { font-size: 12px; color: var(--primary-blue); margin: 0; text-align: center; }
+        .compliance-notice strong { color: var(--primary-orange); }
+        
+        /* Page Footer */
+        .page-footer { padding: 20px; text-align: center; color: rgba(255,255,255,0.7); font-size: 13px; }
+        .page-footer a { color: var(--primary-orange); }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .auth-card { padding: 30px 20px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="auth-header">
+        <a href="index.html">
+            <img src="images/logo.webp" alt="KEMETION">
+            <span class="logo-text">SDS<span>URABHI</span></span>
+        </a>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Create Free Account</h1>
+            <p class="subtitle">Join thousands of cricket fans playing for free</p>
+            
+            <div class="free-banner">
+                🏏 100% FREE FOREVER - No Deposits, No Real Money
+            </div>
+            
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    <div class="error" id="emailError">Please enter a valid email address</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}" required>
+                    <div class="hint">We'll send you an OTP for verification</div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" required onchange="checkAge()">
+                        <div class="error" id="dobError">You must be 18 years or older</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <select id="state" name="state" required onchange="checkState()">
+                            <option value="">Select State</option>
+                            <option value="AN">Andaman and Nicobar Islands</option>
+                            <option value="AP" data-restricted="true">Andhra Pradesh</option>
+                            <option value="AR">Arunachal Pradesh</option>
+                            <option value="AS" data-restricted="true">Assam</option>
+                            <option value="BR">Bihar</option>
+                            <option value="CH">Chandigarh</option>
+                            <option value="CT">Chhattisgarh</option>
+                            <option value="DN">Dadra and Nagar Haveli</option>
+                            <option value="DD">Daman and Diu</option>
+                            <option value="DL">Delhi</option>
+                            <option value="GA">Goa</option>
+                            <option value="GJ">Gujarat</option>
+                            <option value="HR">Haryana</option>
+                            <option value="HP">Himachal Pradesh</option>
+                            <option value="JK">Jammu and Kashmir</option>
+                            <option value="JH">Jharkhand</option>
+                            <option value="KA">Karnataka</option>
+                            <option value="KL">Kerala</option>
+                            <option value="LA">Ladakh</option>
+                            <option value="LD">Lakshadweep</option>
+                            <option value="MP">Madhya Pradesh</option>
+                            <option value="MH">Maharashtra</option>
+                            <option value="MN">Manipur</option>
+                            <option value="ML">Meghalaya</option>
+                            <option value="MZ">Mizoram</option>
+                            <option value="NL" data-restricted="true">Nagaland</option>
+                            <option value="OD" data-restricted="true">Odisha</option>
+                            <option value="PY">Puducherry</option>
+                            <option value="PB">Punjab</option>
+                            <option value="RJ">Rajasthan</option>
+                            <option value="SK" data-restricted="true">Sikkim</option>
+                            <option value="TN">Tamil Nadu</option>
+                            <option value="TG" data-restricted="true">Telangana</option>
+                            <option value="TR">Tripura</option>
+                            <option value="UP">Uttar Pradesh</option>
+                            <option value="UK">Uttarakhand</option>
+                            <option value="WB">West Bengal</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="state-restriction" id="stateRestriction">
+                    <h4>⚠️ Service Not Available</h4>
+                    <p>Fantasy sports services are not available in your state due to local regulations. We apologize for the inconvenience.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-field">
+                        <input type="password" id="password" name="password" placeholder="Create a strong password" required minlength="8">
+                        <span class="password-toggle" onclick="togglePassword()">👁</span>
+                    </div>
+                    <div class="hint">Minimum 8 characters with letters and numbers</div>
+                </div>
+                
+                <div class="age-verification">
+                    <h4><img src="images/icon-18plus.webp" alt="18+" style="width: 24px;"> Age Verification Required</h4>
+                    <p>You must be 18 years or older to use this platform. By signing up, you confirm that you meet the age requirement.</p>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="ageConfirm" name="ageConfirm" required>
+                    <label for="ageConfirm">I confirm that I am 18 years of age or older and I am not a resident of restricted states (Andhra Pradesh, Assam, Nagaland, Odisha, Sikkim, Telangana).</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="termsAccept" name="termsAccept" required>
+                    <label for="termsAccept">I agree to the <a href="terms.html" target="_blank">Terms & Conditions</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>. I understand this is a free-to-play platform with no real money involved.</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="submitBtn">Create Free Account</button>
+            </form>
+            
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+            
+            <div class="compliance-notice">
+                <p><strong>100% Free Platform:</strong> No deposits, no withdrawals, no real money prizes. This is a skill-based entertainment platform for cricket enthusiasts.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="page-footer">
+        <p>© 2024 KEMETION PRIVATE LIMITED | CIN: U47594JH2023PTC020234</p>
+    </div>
+    
+    <script>
+        const restrictedStates = ['AP', 'AS', 'NL', 'OD', 'SK', 'TG'];
+        
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggle = document.querySelector('.password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggle.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggle.textContent = '👁';
+            }
+        }
+        
+        function checkAge() {
+            const dob = new Date(document.getElementById('dob').value);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            
+            const dobError = document.getElementById('dobError');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (age < 18) {
+                dobError.style.display = 'block';
+                submitBtn.disabled = true;
+                return false;
+            } else {
+                dobError.style.display = 'none';
+                checkFormValidity();
+                return true;
+            }
+        }
+        
+        function checkState() {
+            const state = document.getElementById('state').value;
+            const stateRestriction = document.getElementById('stateRestriction');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (restrictedStates.includes(state)) {
+                stateRestriction.style.display = 'block';
+                submitBtn.disabled = true;
+                return false;
+            } else {
+                stateRestriction.style.display = 'none';
+                checkFormValidity();
+                return true;
+            }
+        }
+        
+        function checkFormValidity() {
+            const state = document.getElementById('state').value;
+            const dob = document.getElementById('dob').value;
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (restrictedStates.includes(state)) {
+                submitBtn.disabled = true;
+                return;
+            }
+            
+            if (dob) {
+                const dobDate = new Date(dob);
+                const today = new Date();
+                let age = today.getFullYear() - dobDate.getFullYear();
+                const monthDiff = today.getMonth() - dobDate.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dobDate.getDate())) {
+                    age--;
+                }
+                
+                if (age < 18) {
+                    submitBtn.disabled = true;
+                    return;
+                }
+            }
+            
+            submitBtn.disabled = false;
+        }
+        
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            // Validate age
+            if (!checkAge()) {
+                alert('You must be 18 years or older to sign up.');
+                return;
+            }
+            
+            // Validate state
+            if (!checkState()) {
+                alert('Fantasy sports services are not available in your state.');
+                return;
+            }
+            
+            // Get form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                dob: document.getElementById('dob').value,
+                state: document.getElementById('state').value,
+                password: document.getElementById('password').value
+            };
+            
+            // Simulate signup - In production, this would call your backend API
+            alert('Account creation will be connected to your backend. This is a demo.\n\nYour details:\nName: ' + formData.firstName + ' ' + formData.lastName + '\nEmail: ' + formData.email);
+            // window.location.href = 'login.html';
+        }
+        
+        // Set max date for DOB (must be at least 18 years old)
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+            document.getElementById('dob').max = maxDate.toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>

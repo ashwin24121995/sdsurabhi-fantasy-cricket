@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsible Gaming at KEMETION - Learn about healthy gaming habits and our commitment to player wellbeing.">
+    <title>Responsible Gaming - KEMETION | Free Fantasy Cricket</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a5f;
+            --primary-orange: #ff6b35;
+            --light-blue: #e8f4fc;
+            --dark-blue: #0d1f33;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; color: #333; background: var(--white); }
+        a { text-decoration: none; color: var(--primary-orange); }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header-top { background: var(--primary-blue); color: var(--white); padding: 8px 0; font-size: 13px; }
+        .header-top-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .free-badge { background: var(--primary-orange); padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+        .header-main { padding: 15px 0; }
+        .header-main .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 50px; }
+        .logo-text { font-size: 24px; font-weight: 700; color: var(--primary-blue); }
+        .logo-text span { color: var(--primary-orange); }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { color: var(--primary-blue); font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--primary-orange); }
+        
+        /* Page Header */
+        .page-header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); padding: 140px 0 60px; color: var(--white); text-align: center; }
+        .page-header h1 { font-size: 42px; margin-bottom: 15px; }
+        .page-header p { font-size: 16px; opacity: 0.9; }
+        
+        /* Content */
+        .content-section { padding: 60px 0; }
+        .content-section.alt { background: var(--light-gray); }
+        
+        .section-title { font-size: 28px; color: var(--primary-blue); margin-bottom: 20px; }
+        .section-text { color: var(--gray); margin-bottom: 20px; }
+        
+        .highlight-box { background: var(--light-blue); border-left: 4px solid var(--primary-orange); padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .highlight-box p { margin: 0; color: var(--primary-blue); }
+        
+        /* Tips Grid */
+        .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 30px; }
+        .tip-card { background: var(--white); border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .tip-card h4 { color: var(--primary-blue); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .tip-card p { color: var(--gray); font-size: 14px; }
+        
+        /* Self Assessment */
+        .assessment-card { background: var(--white); border-radius: 16px; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .assessment-card h3 { color: var(--primary-blue); margin-bottom: 20px; font-size: 24px; }
+        .question { margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid var(--light-gray); }
+        .question:last-of-type { border-bottom: none; }
+        .question p { color: var(--primary-blue); font-weight: 600; margin-bottom: 15px; }
+        .options { display: flex; gap: 15px; flex-wrap: wrap; }
+        .option { display: flex; align-items: center; gap: 8px; }
+        .option input { width: 18px; height: 18px; }
+        .option label { color: var(--gray); cursor: pointer; }
+        
+        .btn { padding: 14px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; border: none; font-size: 16px; }
+        .btn-primary { background: var(--primary-orange); color: var(--white); }
+        .btn-primary:hover { background: #e55a2b; }
+        
+        .result-box { margin-top: 30px; padding: 25px; border-radius: 12px; display: none; }
+        .result-box.low { background: #d1fae5; border: 2px solid var(--success); }
+        .result-box.medium { background: #fef3c7; border: 2px solid var(--warning); }
+        .result-box.high { background: #fee2e2; border: 2px solid #ef4444; }
+        .result-box h4 { margin-bottom: 10px; }
+        .result-box.low h4 { color: #065f46; }
+        .result-box.medium h4 { color: #92400e; }
+        .result-box.high h4 { color: #991b1b; }
+        .result-box p { color: var(--gray); }
+        
+        /* Resources */
+        .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .resource-card { background: var(--white); border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .resource-card h4 { color: var(--primary-blue); margin-bottom: 10px; }
+        .resource-card p { color: var(--gray); font-size: 14px; margin-bottom: 15px; }
+        .resource-card a { color: var(--primary-orange); font-weight: 600; }
+        
+        /* Footer */
+        footer { background: var(--dark-blue); color: var(--white); padding: 40px 0 20px; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); max-width: 1200px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+        .footer-links { display: flex; gap: 30px; }
+        .footer-links a { color: var(--white); opacity: 0.8; font-size: 14px; }
+        .footer-bottom { padding-top: 20px; text-align: center; font-size: 13px; opacity: 0.7; }
+        
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .page-header { padding: 120px 0 40px; }
+            .page-header h1 { font-size: 28px; }
+            .options { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="header-top-content">
+                <span class="free-badge">100% FREE TO PLAY</span>
+                <span>No Real Money | Skill-Based Gaming | 18+ Only</span>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.webp" alt="KEMETION Logo">
+                    <span class="logo-text">SDS<span>URABHI</span></span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contests.html">Contests</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="how-to-play.html">How to Play</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Responsible Gaming</h1>
+            <p>Play smart, play safe, play for fun</p>
+        </div>
+    </section>
+    
+    <!-- Introduction -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Our Commitment to Responsible Gaming</h2>
+            <p class="section-text">At KEMETION, we believe that fantasy cricket should be a fun and entertaining experience. While our platform is 100% free with no real money involved, we still encourage healthy gaming habits and responsible play.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Important Reminder:</strong> KEMETION is a completely FREE platform. We do not accept any real money, and there are no financial risks involved. However, we still promote balanced gaming habits to ensure a positive experience for all users.</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>⏰ Set Time Limits</h4>
+                    <p>Decide how much time you want to spend on fantasy cricket and stick to it. Take regular breaks.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🎯 Play for Fun</h4>
+                    <p>Remember, this is entertainment. Enjoy the game without obsessing over rankings or points.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>⚖️ Maintain Balance</h4>
+                    <p>Don't let fantasy cricket interfere with work, studies, relationships, or other responsibilities.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🚫 Never Chase Losses</h4>
+                    <p>If you're on a losing streak, take a break. Don't try to recover by playing more intensively.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>👥 Stay Social</h4>
+                    <p>Play with friends and family. Share the fun but also maintain real-world connections.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🧠 Stay Informed</h4>
+                    <p>Understand that fantasy sports outcomes depend on real match results which are unpredictable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Self Assessment -->
+    <section class="content-section alt">
+        <div class="container">
+            <div class="assessment-card">
+                <h3>🔍 Self-Assessment Quiz</h3>
+                <p style="color: var(--gray); margin-bottom: 30px;">Answer these questions honestly to evaluate your gaming habits. This is for self-reflection only.</p>
+                
+                <form id="assessmentForm">
+                    <div class="question">
+                        <p>1. Do you spend more time on fantasy cricket than you originally planned?</p>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q1" id="q1-never" value="0">
+                                <label for="q1-never">Never</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1" id="q1-sometimes" value="1">
+                                <label for="q1-sometimes">Sometimes</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1" id="q1-often" value="2">
+                                <label for="q1-often">Often</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1" id="q1-always" value="3">
+                                <label for="q1-always">Always</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <p>2. Do you feel restless or irritable when not playing fantasy cricket?</p>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q2" id="q2-never" value="0">
+                                <label for="q2-never">Never</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2" id="q2-sometimes" value="1">
+                                <label for="q2-sometimes">Sometimes</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2" id="q2-often" value="2">
+                                <label for="q2-often">Often</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2" id="q2-always" value="3">
+                                <label for="q2-always">Always</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <p>3. Has fantasy cricket affected your work, studies, or relationships?</p>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q3" id="q3-never" value="0">
+                                <label for="q3-never">Never</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q3" id="q3-sometimes" value="1">
+                                <label for="q3-sometimes">Sometimes</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q3" id="q3-often" value="2">
+                                <label for="q3-often">Often</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q3" id="q3-always" value="3">
+                                <label for="q3-always">Always</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <p>4. Do you find it difficult to stop playing even when you want to?</p>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q4" id="q4-never" value="0">
+                                <label for="q4-never">Never</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q4" id="q4-sometimes" value="1">
+                                <label for="q4-sometimes">Sometimes</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q4" id="q4-often" value="2">
+                                <label for="q4-often">Often</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q4" id="q4-always" value="3">
+                                <label for="q4-always">Always</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <p>5. Do you neglect sleep, meals, or exercise because of fantasy cricket?</p>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q5" id="q5-never" value="0">
+                                <label for="q5-never">Never</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q5" id="q5-sometimes" value="1">
+                                <label for="q5-sometimes">Sometimes</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q5" id="q5-often" value="2">
+                                <label for="q5-often">Often</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q5" id="q5-always" value="3">
+                                <label for="q5-always">Always</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary" onclick="calculateResult()">Get My Results</button>
+                </form>
+                
+                <div class="result-box low" id="resultLow">
+                    <h4>✅ Healthy Gaming Habits</h4>
+                    <p>Great job! Your gaming habits appear to be healthy and balanced. Continue enjoying fantasy cricket responsibly and remember to maintain this balance.</p>
+                </div>
+                
+                <div class="result-box medium" id="resultMedium">
+                    <h4>⚠️ Some Caution Advised</h4>
+                    <p>Your responses suggest that you might benefit from being more mindful about your gaming habits. Consider setting stricter time limits and ensuring fantasy cricket doesn't interfere with other aspects of your life.</p>
+                </div>
+                
+                <div class="result-box high" id="resultHigh">
+                    <h4>🚨 Please Take Action</h4>
+                    <p>Your responses indicate that fantasy cricket may be having a negative impact on your life. We strongly recommend taking a break and speaking with someone you trust about your gaming habits. Remember, this is meant to be fun entertainment, not a source of stress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Resources -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Helpful Resources</h2>
+            <p class="section-text">If you or someone you know needs support, these resources can help:</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h4>iCall - TISS</h4>
+                    <p>Psychosocial helpline providing free counseling services.</p>
+                    <a href="tel:9152987821">📞 9152987821</a>
+                </div>
+                <div class="resource-card">
+                    <h4>Vandrevala Foundation</h4>
+                    <p>24/7 mental health support helpline.</p>
+                    <a href="tel:18602662345">📞 1860-2662-345</a>
+                </div>
+                <div class="resource-card">
+                    <h4>NIMHANS</h4>
+                    <p>National Institute of Mental Health and Neurosciences.</p>
+                    <a href="tel:08046110007">📞 080-46110007</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Account Controls -->
+    <section class="content-section alt">
+        <div class="container">
+            <h2 class="section-title">Account Controls</h2>
+            <p class="section-text">We provide tools to help you manage your gaming:</p>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🔔 Activity Reminders</h4>
+                    <p>Set reminders to take breaks after a certain period of play.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>⏸️ Self-Exclusion</h4>
+                    <p>Temporarily deactivate your account if you need a break.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>📊 Activity History</h4>
+                    <p>Review your playing history to understand your patterns.</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 30px;">
+                <p>To access these features or request account deactivation, please contact us at <a href="mailto:support@kemetionplay.com">support@kemetionplay.com</a></p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="terms.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="responsible-gaming.html">Responsible Gaming</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div style="font-size: 13px; opacity: 0.8;">
+                <strong style="color: var(--primary-orange);">100% FREE</strong> | No Real Money | 18+ Only
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2024 KEMETION PRIVATE LIMITED | CIN: U47594JH2023PTC020234 | This is a free-to-play platform.
+        </div>
+    </footer>
+    
+    <script>
+        function calculateResult() {
+            const form = document.getElementById('assessmentForm');
+            let score = 0;
+            let answered = 0;
+            
+            for (let i = 1; i <= 5; i++) {
+                const selected = form.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    score += parseInt(selected.value);
+                    answered++;
+                }
+            }
+            
+            if (answered < 5) {
+                alert('Please answer all questions to get your results.');
+                return;
+            }
+            
+            // Hide all results first
+            document.getElementById('resultLow').style.display = 'none';
+            document.getElementById('resultMedium').style.display = 'none';
+            document.getElementById('resultHigh').style.display = 'none';
+            
+            // Show appropriate result
+            if (score <= 4) {
+                document.getElementById('resultLow').style.display = 'block';
+            } else if (score <= 9) {
+                document.getElementById('resultMedium').style.display = 'block';
+            } else {
+                document.getElementById('resultHigh').style.display = 'block';
+            }
+            
+            // Scroll to result
+            document.querySelector('.result-box[style*="block"]').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Frequently Asked Questions about KEMETION - India's 100% free fantasy cricket platform.">
+    <title>FAQ - KEMETION | Free Fantasy Cricket</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a5f;
+            --primary-orange: #ff6b35;
+            --light-blue: #e8f4fc;
+            --dark-blue: #0d1f33;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: var(--white); }
+        a { text-decoration: none; color: var(--primary-orange); }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header-top { background: var(--primary-blue); color: var(--white); padding: 8px 0; font-size: 13px; }
+        .header-top-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .free-badge { background: var(--primary-orange); padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+        .header-main { padding: 15px 0; }
+        .header-main .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 50px; }
+        .logo-text { font-size: 24px; font-weight: 700; color: var(--primary-blue); }
+        .logo-text span { color: var(--primary-orange); }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { color: var(--primary-blue); font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--primary-orange); }
+        
+        /* Page Header */
+        .page-header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); padding: 140px 0 60px; color: var(--white); text-align: center; }
+        .page-header h1 { font-size: 42px; margin-bottom: 15px; }
+        .page-header p { font-size: 16px; opacity: 0.9; }
+        
+        /* Content */
+        .content-section { padding: 60px 0; }
+        
+        /* FAQ Categories */
+        .faq-categories { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .category-btn { padding: 10px 25px; border: 2px solid var(--primary-blue); background: var(--white); color: var(--primary-blue); border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .category-btn.active, .category-btn:hover { background: var(--primary-blue); color: var(--white); }
+        
+        /* Accordion */
+        .faq-list { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--white); border: 1px solid var(--light-gray); border-radius: 12px; margin-bottom: 15px; overflow: hidden; }
+        .faq-question { padding: 20px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
+        .faq-question:hover { background: var(--light-blue); }
+        .faq-question h3 { font-size: 16px; color: var(--primary-blue); font-weight: 600; margin: 0; flex: 1; padding-right: 15px; }
+        .faq-icon { width: 24px; height: 24px; border-radius: 50%; background: var(--primary-orange); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 700; transition: transform 0.3s; flex-shrink: 0; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: all 0.3s ease; }
+        .faq-item.active .faq-answer { padding: 0 25px 20px; max-height: 500px; }
+        .faq-answer p { color: var(--gray); margin: 0; }
+        .faq-answer ul { color: var(--gray); margin: 10px 0 0 20px; }
+        .faq-answer li { margin-bottom: 5px; }
+        
+        /* Highlight Box */
+        .highlight-box { background: var(--light-blue); border-left: 4px solid var(--primary-orange); padding: 20px; margin: 40px 0; border-radius: 0 8px 8px 0; text-align: center; }
+        .highlight-box p { margin: 0; color: var(--primary-blue); }
+        
+        /* Contact CTA */
+        .contact-cta { text-align: center; margin-top: 50px; padding: 40px; background: var(--light-gray); border-radius: 16px; }
+        .contact-cta h3 { color: var(--primary-blue); margin-bottom: 15px; }
+        .contact-cta p { color: var(--gray); margin-bottom: 20px; }
+        .btn { padding: 14px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; border: none; font-size: 16px; display: inline-block; }
+        .btn-primary { background: var(--primary-orange); color: var(--white); }
+        
+        /* Footer */
+        footer { background: var(--dark-blue); color: var(--white); padding: 40px 0 20px; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); max-width: 1200px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+        .footer-links { display: flex; gap: 30px; }
+        .footer-links a { color: var(--white); opacity: 0.8; font-size: 14px; }
+        .footer-bottom { padding-top: 20px; text-align: center; font-size: 13px; opacity: 0.7; }
+        
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .page-header { padding: 120px 0 40px; }
+            .page-header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="header-top-content">
+                <span class="free-badge">100% FREE TO PLAY</span>
+                <span>No Real Money | Skill-Based Gaming | 18+ Only</span>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.webp" alt="KEMETION Logo">
+                    <span class="logo-text">SDS<span>URABHI</span></span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contests.html">Contests</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="how-to-play.html">How to Play</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about KEMETION</p>
+        </div>
+    </section>
+    
+    <!-- FAQ Content -->
+    <section class="content-section">
+        <div class="container">
+            <!-- Categories -->
+            <div class="faq-categories">
+                <button class="category-btn active" onclick="filterFAQ('all', this)">All</button>
+                <button class="category-btn" onclick="filterFAQ('general', this)">General</button>
+                <button class="category-btn" onclick="filterFAQ('gameplay', this)">Gameplay</button>
+                <button class="category-btn" onclick="filterFAQ('account', this)">Account</button>
+                <button class="category-btn" onclick="filterFAQ('legal', this)">Legal</button>
+            </div>
+            
+            <div class="highlight-box">
+                <p><strong>Important:</strong> KEMETION is 100% FREE. We never charge any fees or accept real money. If anyone asks you to pay, it is a scam.</p>
+            </div>
+            
+            <!-- FAQ List -->
+            <div class="faq-list">
+                <!-- General FAQs -->
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>What is KEMETION?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>KEMETION is India's 100% free fantasy cricket platform where you can create virtual cricket teams and compete with other fans based on real match performances. It's completely free to play with no real money involved.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Is KEMETION really free?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, KEMETION is 100% free forever. We do not:</p>
+                        <ul>
+                            <li>Charge any entry fees for contests</li>
+                            <li>Accept any real money deposits</li>
+                            <li>Process any withdrawals</li>
+                            <li>Offer any real money prizes</li>
+                        </ul>
+                        <p>Points earned are for entertainment and leaderboard rankings only.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Is fantasy cricket legal in India?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, fantasy sports is legal in most parts of India. The Supreme Court and various High Courts have recognized fantasy sports as games of skill, which are legal under Indian law. However, some states have restrictions, which is why we don't offer services in Andhra Pradesh, Assam, Nagaland, Odisha, Sikkim, and Telangana.</p>
+                    </div>
+                </div>
+                
+                <!-- Gameplay FAQs -->
+                <div class="faq-item" data-category="gameplay">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How do I create a fantasy team?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Creating a team is simple:</p>
+                        <ul>
+                            <li>Select a match from the Contests page</li>
+                            <li>Pick 11 players from both teams</li>
+                            <li>Follow the role constraints (WK, BAT, AR, BOWL)</li>
+                            <li>Choose your Captain (2x points) and Vice-Captain (1.5x points)</li>
+                            <li>Submit your team before the match starts</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="gameplay">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How are fantasy points calculated?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Points are calculated based on real match performance:</p>
+                        <ul>
+                            <li>Batting: Runs, boundaries, centuries, etc.</li>
+                            <li>Bowling: Wickets, maiden overs, economy rate</li>
+                            <li>Fielding: Catches, stumpings, run outs</li>
+                            <li>Captain gets 2x points, Vice-Captain gets 1.5x points</li>
+                        </ul>
+                        <p>Visit our <a href="how-to-play.html">How to Play</a> page for the complete points system.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="gameplay">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Can I edit my team after creating it?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can edit your team any number of times before the match starts. Once the match begins, no changes are allowed. Make sure to finalize your team based on the playing XI announcement.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="gameplay">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>What happens if a player I selected doesn't play?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If a player you selected doesn't play in the match, they will earn 0 points. There are no automatic substitutions. We recommend checking the playing XI announcement before the match and updating your team accordingly.</p>
+                    </div>
+                </div>
+                
+                <!-- Account FAQs -->
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How do I create an account?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Creating an account is free and easy:</p>
+                        <ul>
+                            <li>Click on "Sign Up Free" button</li>
+                            <li>Enter your name, email, phone number</li>
+                            <li>Provide your date of birth (must be 18+)</li>
+                            <li>Select your state of residence</li>
+                            <li>Create a password and agree to terms</li>
+                            <li>Verify your phone number via OTP</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>What is the minimum age requirement?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You must be at least 18 years old to use KEMETION. We verify age during registration and may request additional verification if needed. Users found to be underage will have their accounts terminated.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>I forgot my password. How do I reset it?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Click on "Forgot Password" on the login page, enter your registered email address, and we'll send you a password reset link. Follow the link to create a new password. If you don't receive the email, check your spam folder or contact support.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Can I have multiple accounts?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, each user is allowed only one account. Multiple accounts are strictly prohibited and will result in termination of all accounts. This policy ensures fair play for all users.</p>
+                    </div>
+                </div>
+                
+                <!-- Legal FAQs -->
+                <div class="faq-item" data-category="legal">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Which states are restricted?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our services are not available in the following states due to local regulations:</p>
+                        <ul>
+                            <li>Andhra Pradesh</li>
+                            <li>Assam</li>
+                            <li>Nagaland</li>
+                            <li>Odisha</li>
+                            <li>Sikkim</li>
+                            <li>Telangana</li>
+                        </ul>
+                        <p>Residents of these states are prohibited from using our platform.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="legal">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Is my personal data safe?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we take data security seriously. We use industry-standard encryption, secure servers, and strict access controls. We never sell your personal information to third parties. Read our <a href="privacy.html">Privacy Policy</a> for complete details.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="legal">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Who operates KEMETION?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>KEMETION is operated by KEMETION PRIVATE LIMITED, a company registered in India.</p>
+                        <ul>
+                            <li>CIN: U47594JH2023PTC020234</li>
+                            <li>GST: 09ABMCS3759A1Z4</li>
+                            <li>Registered Address: Ram Achhayvar 48/2, Ayodhya Puri 2, Bijnour, Sarojini Nagar, Lucknow, Uttar Pradesh 226008, India</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="legal">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How do I report a problem or complaint?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can reach us through:</p>
+                        <ul>
+                            <li>Email: support@kemetionplay.com</li>
+                            <li>Contact form on our website</li>
+                        </ul>
+                        <p>We aim to respond to all queries within 24-48 hours.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact CTA -->
+            <div class="contact-cta">
+                <h3>Still have questions?</h3>
+                <p>Can't find what you're looking for? Our support team is here to help.</p>
+                <a href="contact.html" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="terms.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="responsible-gaming.html">Responsible Gaming</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div style="font-size: 13px; opacity: 0.8;">
+                <strong style="color: var(--primary-orange);">100% FREE</strong> | No Real Money | 18+ Only
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2024 KEMETION PRIVATE LIMITED | CIN: U47594JH2023PTC020234 | This is a free-to-play platform.
+        </div>
+    </footer>
+    
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Toggle current FAQ
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+        
+        function filterFAQ(category, btn) {
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Filter FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to KEMETION - India's 100% free fantasy cricket platform. Access your account and start playing.">
+    <title>Login - KEMETION | Free Fantasy Cricket</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a5f;
+            --primary-orange: #ff6b35;
+            --light-blue: #e8f4fc;
+            --dark-blue: #0d1f33;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); min-height: 100vh; display: flex; flex-direction: column; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* Header */
+        .auth-header { padding: 20px; text-align: center; }
+        .auth-header a { display: inline-flex; align-items: center; gap: 10px; }
+        .auth-header img { height: 50px; }
+        .auth-header .logo-text { font-size: 24px; font-weight: 700; color: var(--white); }
+        .auth-header .logo-text span { color: var(--primary-orange); }
+        
+        /* Main Content */
+        .auth-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .auth-card { background: var(--white); border-radius: 20px; padding: 40px; width: 100%; max-width: 450px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .auth-card h1 { color: var(--primary-blue); font-size: 28px; margin-bottom: 10px; text-align: center; }
+        .auth-card .subtitle { color: var(--gray); text-align: center; margin-bottom: 30px; }
+        
+        .free-banner { background: linear-gradient(135deg, var(--primary-orange), #ff8c5a); color: var(--white); padding: 12px 20px; border-radius: 10px; text-align: center; margin-bottom: 25px; font-weight: 600; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-blue); }
+        .form-group input { width: 100%; padding: 14px 16px; border: 2px solid var(--light-gray); border-radius: 10px; font-size: 16px; transition: border-color 0.3s; }
+        .form-group input:focus { outline: none; border-color: var(--primary-orange); }
+        .form-group .error { color: var(--danger); font-size: 13px; margin-top: 5px; display: none; }
+        
+        .password-field { position: relative; }
+        .password-toggle { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--gray); }
+        
+        .form-options { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .remember-me { display: flex; align-items: center; gap: 8px; }
+        .remember-me input { width: 18px; height: 18px; }
+        .forgot-link { color: var(--primary-orange); font-weight: 600; }
+        
+        .btn { width: 100%; padding: 16px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.3s; border: none; font-size: 16px; }
+        .btn-primary { background: var(--primary-orange); color: var(--white); }
+        .btn-primary:hover { background: #e55a2b; transform: translateY(-2px); }
+        
+        .divider { display: flex; align-items: center; margin: 25px 0; }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--light-gray); }
+        .divider span { padding: 0 15px; color: var(--gray); font-size: 14px; }
+        
+        .social-login { display: flex; gap: 15px; }
+        .social-btn { flex: 1; padding: 12px; border: 2px solid var(--light-gray); border-radius: 10px; background: var(--white); cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s; }
+        .social-btn:hover { border-color: var(--primary-blue); background: var(--light-blue); }
+        
+        .auth-footer { text-align: center; margin-top: 25px; color: var(--gray); }
+        .auth-footer a { color: var(--primary-orange); font-weight: 600; }
+        
+        /* Compliance Notice */
+        .compliance-notice { background: var(--light-blue); border-radius: 10px; padding: 15px; margin-top: 20px; }
+        .compliance-notice p { font-size: 12px; color: var(--primary-blue); margin: 0; text-align: center; }
+        .compliance-notice strong { color: var(--primary-orange); }
+        
+        /* Page Footer */
+        .page-footer { padding: 20px; text-align: center; color: rgba(255,255,255,0.7); font-size: 13px; }
+        .page-footer a { color: var(--primary-orange); }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .auth-card { padding: 30px 20px; }
+            .social-login { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="auth-header">
+        <a href="index.html">
+            <img src="images/logo.webp" alt="KEMETION">
+            <span class="logo-text">SDS<span>URABHI</span></span>
+        </a>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Welcome Back!</h1>
+            <p class="subtitle">Login to continue playing free fantasy cricket</p>
+            
+            <div class="free-banner">
+                🏏 100% FREE TO PLAY - No Real Money Involved
+            </div>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    <div class="error" id="emailError">Please enter a valid email address</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-field">
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        <span class="password-toggle" onclick="togglePassword()">👁</span>
+                    </div>
+                    <div class="error" id="passwordError">Password is required</div>
+                </div>
+                
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            
+            <div class="divider">
+                <span>or continue with</span>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-btn" onclick="socialLogin('google')">
+                    <span>G</span> Google
+                </button>
+                <button class="social-btn" onclick="socialLogin('phone')">
+                    <span>📱</span> Phone
+                </button>
+            </div>
+            
+            <div class="auth-footer">
+                Don't have an account? <a href="signup.html">Sign Up Free</a>
+            </div>
+            
+            <div class="compliance-notice">
+                <p><strong>Important:</strong> This is a free-to-play platform. No real money deposits or withdrawals. For users 18+ only. Not available in restricted states.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="page-footer">
+        <p>© 2024 KEMETION PRIVATE LIMITED | <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a></p>
+    </div>
+    
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggle = document.querySelector('.password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggle.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggle.textContent = '👁';
+            }
+        }
+        
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Basic validation
+            let isValid = true;
+            
+            if (!email || !email.includes('@')) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+            
+            if (!password) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('passwordError').style.display = 'none';
+            }
+            
+            if (isValid) {
+                // Simulate login - In production, this would call your backend API
+                alert('Login functionality will be connected to your backend. This is a demo.');
+                // window.location.href = 'index.html';
+            }
+        }
+        
+        function socialLogin(provider) {
+            alert(`${provider} login will be integrated with your backend authentication system.`);
+        }
+    </script>
+</body>
+</html>

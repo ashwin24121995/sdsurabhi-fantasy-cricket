@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create your fantasy cricket team on KEMETION. Select players, pick captain and vice-captain, and join free contests.">
+    <title>Create Team - KEMETION | Free Fantasy Cricket</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a5f;
+            --primary-orange: #ff6b35;
+            --light-blue: #e8f4fc;
+            --dark-blue: #0d1f33;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: var(--light-gray); }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header-top { background: var(--primary-blue); color: var(--white); padding: 8px 0; font-size: 13px; text-align: center; }
+        .header-main { padding: 15px 0; }
+        .header-main .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 40px; }
+        .logo-text { font-size: 20px; font-weight: 700; color: var(--primary-blue); }
+        .logo-text span { color: var(--primary-orange); }
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; border: none; font-size: 14px; display: inline-block; }
+        .btn-primary { background: var(--primary-orange); color: var(--white); }
+        .btn-outline { background: transparent; border: 2px solid var(--primary-blue); color: var(--primary-blue); }
+        
+        /* Match Header */
+        .match-header-section { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); padding: 120px 0 30px; color: var(--white); }
+        .match-info-card { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 25px; backdrop-filter: blur(10px); }
+        .match-teams-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .team-header { text-align: center; flex: 1; }
+        .team-header img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.3); margin-bottom: 10px; }
+        .team-header h3 { font-size: 18px; margin-bottom: 5px; }
+        .team-header .score { font-size: 24px; font-weight: 700; color: var(--primary-orange); }
+        .vs-badge-large { background: var(--primary-orange); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; }
+        .match-status-bar { display: flex; justify-content: center; gap: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .status-item { text-align: center; }
+        .status-item .label { font-size: 12px; opacity: 0.8; margin-bottom: 5px; }
+        .status-item .value { font-weight: 700; font-size: 16px; }
+        .live-indicator { background: var(--danger); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 700; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        
+        /* Team Creation Section */
+        .team-creation { padding: 30px 0; }
+        .creation-grid { display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
+        
+        /* Players Selection */
+        .players-section { background: var(--white); border-radius: 16px; padding: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .section-title { font-size: 20px; color: var(--primary-blue); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .player-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .player-tab { padding: 10px 20px; border: 2px solid var(--light-gray); background: var(--white); border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.3s; }
+        .player-tab.active { background: var(--primary-blue); color: var(--white); border-color: var(--primary-blue); }
+        .player-tab .count { background: var(--primary-orange); color: var(--white); padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 5px; }
+        
+        .players-list { max-height: 500px; overflow-y: auto; }
+        .player-card { display: flex; align-items: center; padding: 15px; border: 2px solid var(--light-gray); border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: all 0.3s; }
+        .player-card:hover { border-color: var(--primary-blue); background: var(--light-blue); }
+        .player-card.selected { border-color: var(--success); background: #d1fae5; }
+        .player-card.disabled { opacity: 0.5; cursor: not-allowed; }
+        .player-avatar { width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; object-fit: cover; }
+        .player-info { flex: 1; }
+        .player-name { font-weight: 700; color: var(--primary-blue); margin-bottom: 3px; }
+        .player-role { font-size: 12px; color: var(--gray); }
+        .player-team { font-size: 11px; color: var(--primary-orange); font-weight: 600; }
+        .player-points { text-align: right; }
+        .points-value { font-size: 18px; font-weight: 700; color: var(--primary-blue); }
+        .points-label { font-size: 11px; color: var(--gray); }
+        .player-select-btn { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--gray); background: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; margin-left: 15px; transition: all 0.3s; }
+        .player-card.selected .player-select-btn { background: var(--success); border-color: var(--success); color: var(--white); }
+        
+        /* Team Preview */
+        .team-preview { position: sticky; top: 120px; }
+        .preview-card { background: var(--white); border-radius: 16px; padding: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .preview-title { font-size: 18px; color: var(--primary-blue); margin-bottom: 15px; font-weight: 700; }
+        .team-progress { margin-bottom: 20px; }
+        .progress-bar { height: 8px; background: var(--light-gray); border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--success)); border-radius: 4px; transition: width 0.3s; }
+        .progress-text { display: flex; justify-content: space-between; font-size: 13px; color: var(--gray); }
+        
+        .role-counts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+        .role-count { background: var(--light-gray); padding: 12px; border-radius: 8px; text-align: center; }
+        .role-count .role { font-size: 12px; color: var(--gray); margin-bottom: 5px; }
+        .role-count .count { font-size: 18px; font-weight: 700; color: var(--primary-blue); }
+        .role-count.complete { background: #d1fae5; }
+        .role-count.complete .count { color: var(--success); }
+        
+        .captain-selection { margin-bottom: 20px; }
+        .captain-title { font-size: 14px; font-weight: 600; color: var(--primary-blue); margin-bottom: 10px; }
+        .captain-slots { display: flex; gap: 15px; }
+        .captain-slot { flex: 1; background: var(--light-gray); border-radius: 12px; padding: 15px; text-align: center; border: 2px dashed var(--gray); }
+        .captain-slot.filled { border-style: solid; border-color: var(--primary-orange); background: var(--light-blue); }
+        .captain-slot img { width: 40px; height: 40px; border-radius: 50%; margin-bottom: 8px; }
+        .captain-slot .badge { font-size: 11px; font-weight: 700; color: var(--primary-orange); }
+        .captain-slot .name { font-size: 12px; font-weight: 600; color: var(--primary-blue); }
+        
+        .selected-players { margin-bottom: 20px; }
+        .selected-player { display: flex; align-items: center; padding: 10px; background: var(--light-gray); border-radius: 8px; margin-bottom: 8px; }
+        .selected-player img { width: 35px; height: 35px; border-radius: 50%; margin-right: 10px; }
+        .selected-player .name { flex: 1; font-size: 13px; font-weight: 600; }
+        .selected-player .remove { color: var(--danger); cursor: pointer; font-size: 18px; }
+        .selected-player .captain-badge { background: var(--primary-orange); color: var(--white); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; margin-left: 5px; }
+        
+        .submit-btn { width: 100%; padding: 15px; background: var(--primary-orange); color: var(--white); border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .submit-btn:hover:not(:disabled) { background: #e55a2b; transform: translateY(-2px); }
+        .submit-btn:disabled { background: var(--gray); cursor: not-allowed; }
+        
+        /* Disclaimer */
+        .disclaimer-box { background: var(--light-blue); border-left: 4px solid var(--primary-orange); padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px; }
+        .disclaimer-box p { font-size: 12px; color: var(--primary-blue); margin: 0; }
+        
+        /* Loading */
+        .loading { display: flex; justify-content: center; align-items: center; padding: 60px; }
+        .spinner { width: 50px; height: 50px; border: 4px solid var(--light-gray); border-top-color: var(--primary-orange); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: var(--white); border-radius: 16px; padding: 30px; max-width: 400px; width: 90%; text-align: center; }
+        .modal-content h3 { color: var(--primary-blue); margin-bottom: 15px; }
+        .modal-content p { color: var(--gray); margin-bottom: 20px; }
+        .modal-buttons { display: flex; gap: 15px; justify-content: center; }
+        
+        /* Footer */
+        footer { background: var(--dark-blue); color: var(--white); padding: 30px 0; margin-top: 50px; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: var(--white); opacity: 0.8; font-size: 13px; }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .creation-grid { grid-template-columns: 1fr; }
+            .team-preview { position: relative; top: 0; }
+            .match-teams-header { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <strong>100% FREE</strong> | No Real Money | Skill-Based Gaming | 18+ Only
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.webp" alt="KEMETION">
+                    <span class="logo-text">SDS<span>URABHI</span></span>
+                </a>
+                <div>
+                    <a href="contests.html" class="btn btn-outline" style="margin-right: 10px;">← Back to Contests</a>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Match Header -->
+    <section class="match-header-section">
+        <div class="container">
+            <div class="match-info-card" id="matchInfoCard">
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Team Creation -->
+    <section class="team-creation">
+        <div class="container">
+            <div class="creation-grid">
+                <!-- Players Selection -->
+                <div class="players-section">
+                    <h2 class="section-title">
+                        <img src="images/player-batsman.webp" alt="Players" style="width: 30px;">
+                        Select Players (11)
+                    </h2>
+                    
+                    <div class="player-tabs">
+                        <button class="player-tab active" onclick="filterPlayers('all', this)">All</button>
+                        <button class="player-tab" onclick="filterPlayers('wk', this)">WK <span class="count" id="wkCount">0</span></button>
+                        <button class="player-tab" onclick="filterPlayers('bat', this)">BAT <span class="count" id="batCount">0</span></button>
+                        <button class="player-tab" onclick="filterPlayers('ar', this)">AR <span class="count" id="arCount">0</span></button>
+                        <button class="player-tab" onclick="filterPlayers('bowl', this)">BOWL <span class="count" id="bowlCount">0</span></button>
+                    </div>
+                    
+                    <div class="players-list" id="playersList">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Preview -->
+                <div class="team-preview">
+                    <div class="preview-card">
+                        <h3 class="preview-title">Your Team</h3>
+                        
+                        <div class="team-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="selectedCount">0</span>
+                                <span>11 Players</span>
+                            </div>
+                        </div>
+                        
+                        <div class="role-counts">
+                            <div class="role-count" id="wkRole">
+                                <div class="role">WK</div>
+                                <div class="count">0/1-4</div>
+                            </div>
+                            <div class="role-count" id="batRole">
+                                <div class="role">BAT</div>
+                                <div class="count">0/3-6</div>
+                            </div>
+                            <div class="role-count" id="arRole">
+                                <div class="role">AR</div>
+                                <div class="count">0/1-4</div>
+                            </div>
+                            <div class="role-count" id="bowlRole">
+                                <div class="role">BOWL</div>
+                                <div class="count">0/3-6</div>
+                            </div>
+                        </div>
+                        
+                        <div class="captain-selection">
+                            <div class="captain-title">Captain & Vice-Captain</div>
+                            <div class="captain-slots">
+                                <div class="captain-slot" id="captainSlot" onclick="selectCaptain()">
+                                    <img src="images/badge-captain.webp" alt="C" style="width: 30px; height: 30px;">
+                                    <div class="badge">CAPTAIN (2x)</div>
+                                    <div class="name" id="captainName">Select</div>
+                                </div>
+                                <div class="captain-slot" id="vcSlot" onclick="selectVC()">
+                                    <img src="images/badge-vice-captain.webp" alt="VC" style="width: 30px; height: 30px;">
+                                    <div class="badge">VICE-C (1.5x)</div>
+                                    <div class="name" id="vcName">Select</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="selected-players" id="selectedPlayersList">
+                            <p style="text-align: center; color: var(--gray); font-size: 13px;">Select players to build your team</p>
+                        </div>
+                        
+                        <button class="submit-btn" id="submitBtn" onclick="submitTeam()" disabled>
+                            Create Team (Select 11 Players)
+                        </button>
+                    </div>
+                    
+                    <div class="disclaimer-box">
+                        <p><strong>Free Contest:</strong> This is a free-to-play contest. No real money is involved. Points are for leaderboard ranking only.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Captain Selection Modal -->
+    <div class="modal" id="captainModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Select Captain</h3>
+            <p id="modalDesc">Choose a player from your team</p>
+            <div id="modalPlayersList"></div>
+            <div class="modal-buttons">
+                <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <img src="images/trophy.webp" alt="Success" style="width: 80px; margin-bottom: 15px;">
+            <h3>Team Created Successfully!</h3>
+            <p>Your fantasy team has been created. Good luck!</p>
+            <div class="modal-buttons">
+                <a href="contests.html" class="btn btn-outline">View Contests</a>
+                <a href="leaderboard.html" class="btn btn-primary">Leaderboard</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
+                    <a href="responsible-gaming.html">Responsible Gaming</a>
+                </div>
+                <div style="font-size: 12px; opacity: 0.8;">
+                    © 2024 KEMETION | 100% FREE | No Real Money
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const API_KEY = '1a822521-d7e0-46ff-98d3-3e51020863f3';
+        const API_BASE = 'https://api.cricapi.com/v1';
+        
+        let matchId = new URLSearchParams(window.location.search).get('id');
+        let matchData = null;
+        let allPlayers = [];
+        let selectedPlayers = [];
+        let captain = null;
+        let viceCaptain = null;
+        let currentFilter = 'all';
+        let selectingCaptain = false;
+        let selectingVC = false;
+        
+        // Role limits
+        const roleLimits = {
+            wk: { min: 1, max: 4 },
+            bat: { min: 3, max: 6 },
+            ar: { min: 1, max: 4 },
+            bowl: { min: 3, max: 6 }
+        };
+        
+        function getPlayerRole(role) {
+            if (!role) return 'bat';
+            const r = role.toLowerCase();
+            if (r.includes('keeper') || r.includes('wk')) return 'wk';
+            if (r.includes('all') || r.includes('ar')) return 'ar';
+            if (r.includes('bowl')) return 'bowl';
+            return 'bat';
+        }
+        
+        function getRoleCounts() {
+            const counts = { wk: 0, bat: 0, ar: 0, bowl: 0 };
+            selectedPlayers.forEach(p => {
+                const role = getPlayerRole(p.role);
+                counts[role]++;
+            });
+            return counts;
+        }
+        
+        function canSelectPlayer(player) {
+            if (selectedPlayers.length >= 11) return false;
+            if (selectedPlayers.find(p => p.id === player.id)) return false;
+            
+            const role = getPlayerRole(player.role);
+            const counts = getRoleCounts();
+            
+            if (counts[role] >= roleLimits[role].max) return false;
+            
+            // Check if selecting this player would make it impossible to complete the team
+            const remaining = 11 - selectedPlayers.length - 1;
+            let minNeeded = 0;
+            for (const r in roleLimits) {
+                if (r !== role) {
+                    const needed = Math.max(0, roleLimits[r].min - counts[r]);
+                    minNeeded += needed;
+                }
+            }
+            if (minNeeded > remaining) return false;
+            
+            return true;
+        }
+        
+        function togglePlayer(player) {
+            const index = selectedPlayers.findIndex(p => p.id === player.id);
+            
+            if (index > -1) {
+                // Remove player
+                selectedPlayers.splice(index, 1);
+                if (captain && captain.id === player.id) captain = null;
+                if (viceCaptain && viceCaptain.id === player.id) viceCaptain = null;
+            } else {
+                // Add player
+                if (canSelectPlayer(player)) {
+                    selectedPlayers.push(player);
+                }
+            }
+            
+            updateUI();
+        }
+        
+        function updateUI() {
+            const counts = getRoleCounts();
+            
+            // Update progress
+            document.getElementById('progressFill').style.width = `${(selectedPlayers.length / 11) * 100}%`;
+            document.getElementById('selectedCount').textContent = `${selectedPlayers.length} Selected`;
+            
+            // Update role counts
+            document.getElementById('wkRole').querySelector('.count').textContent = `${counts.wk}/${roleLimits.wk.min}-${roleLimits.wk.max}`;
+            document.getElementById('batRole').querySelector('.count').textContent = `${counts.bat}/${roleLimits.bat.min}-${roleLimits.bat.max}`;
+            document.getElementById('arRole').querySelector('.count').textContent = `${counts.ar}/${roleLimits.ar.min}-${roleLimits.ar.max}`;
+            document.getElementById('bowlRole').querySelector('.count').textContent = `${counts.bowl}/${roleLimits.bowl.min}-${roleLimits.bowl.max}`;
+            
+            // Update tab counts
+            document.getElementById('wkCount').textContent = counts.wk;
+            document.getElementById('batCount').textContent = counts.bat;
+            document.getElementById('arCount').textContent = counts.ar;
+            document.getElementById('bowlCount').textContent = counts.bowl;
+            
+            // Update captain slots
+            if (captain) {
+                document.getElementById('captainSlot').classList.add('filled');
+                document.getElementById('captainName').textContent = captain.name.split(' ').pop();
+            } else {
+                document.getElementById('captainSlot').classList.remove('filled');
+                document.getElementById('captainName').textContent = 'Select';
+            }
+            
+            if (viceCaptain) {
+                document.getElementById('vcSlot').classList.add('filled');
+                document.getElementById('vcName').textContent = viceCaptain.name.split(' ').pop();
+            } else {
+                document.getElementById('vcSlot').classList.remove('filled');
+                document.getElementById('vcName').textContent = 'Select';
+            }
+            
+            // Update selected players list
+            const listEl = document.getElementById('selectedPlayersList');
+            if (selectedPlayers.length === 0) {
+                listEl.innerHTML = '<p style="text-align: center; color: var(--gray); font-size: 13px;">Select players to build your team</p>';
+            } else {
+                listEl.innerHTML = selectedPlayers.map(p => `
+                    <div class="selected-player">
+                        <img src="${p.playerImg || 'images/icon-user.webp'}" alt="${p.name}" onerror="this.src='images/icon-user.webp'">
+                        <span class="name">${p.name}${captain && captain.id === p.id ? '<span class="captain-badge">C</span>' : ''}${viceCaptain && viceCaptain.id === p.id ? '<span class="captain-badge" style="background: var(--primary-blue);">VC</span>' : ''}</span>
+                        <span class="remove" onclick="togglePlayer(${JSON.stringify(p).replace(/"/g, '&quot;')})">×</span>
+                    </div>
+                `).join('');
+            }
+            
+            // Update submit button
+            const submitBtn = document.getElementById('submitBtn');
+            const isValid = selectedPlayers.length === 11 && captain && viceCaptain;
+            submitBtn.disabled = !isValid;
+            submitBtn.textContent = isValid ? 'Create Team' : `Create Team (${11 - selectedPlayers.length} more needed)`;
+            
+            // Re-render players list
+            renderPlayers();
+        }
+        
+        function filterPlayers(filter, btn) {
+            currentFilter = filter;
+            document.querySelectorAll('.player-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            renderPlayers();
+        }
+        
+        function renderPlayers() {
+            const listEl = document.getElementById('playersList');
+            
+            let players = allPlayers;
+            if (currentFilter !== 'all') {
+                players = allPlayers.filter(p => getPlayerRole(p.role) === currentFilter);
+            }
+            
+            if (players.length === 0) {
+                listEl.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 40px;">No players available</p>';
+                return;
+            }
+            
+            listEl.innerHTML = players.map(player => {
+                const isSelected = selectedPlayers.find(p => p.id === player.id);
+                const canSelect = canSelectPlayer(player);
+                const role = getPlayerRole(player.role);
+                const roleImg = role === 'wk' ? 'player-keeper.webp' : role === 'bowl' ? 'player-bowler.webp' : role === 'ar' ? 'player-allrounder.webp' : 'player-batsman.webp';
+                
+                return `
+                    <div class="player-card ${isSelected ? 'selected' : ''} ${!isSelected && !canSelect ? 'disabled' : ''}" onclick="${!isSelected && !canSelect ? '' : `togglePlayer(${JSON.stringify(player).replace(/"/g, '&quot;')})`}">
+                        <img src="${player.playerImg || `images/${roleImg}`}" alt="${player.name}" class="player-avatar" onerror="this.src='images/${roleImg}'">
+                        <div class="player-info">
+                            <div class="player-name">${player.name}</div>
+                            <div class="player-role">${player.role || 'Batsman'}</div>
+                            <div class="player-team">${player.teamName || 'Team'}</div>
+                        </div>
+                        <div class="player-points">
+                            <div class="points-value">${player.fantasyPoints || Math.floor(Math.random() * 100) + 50}</div>
+                            <div class="points-label">Points</div>
+                        </div>
+                        <div class="player-select-btn">${isSelected ? '✓' : '+'}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function selectCaptain() {
+            if (selectedPlayers.length === 0) {
+                alert('Please select players first');
+                return;
+            }
+            selectingCaptain = true;
+            selectingVC = false;
+            showCaptainModal('Select Captain', 'Captain gets 2x points');
+        }
+        
+        function selectVC() {
+            if (selectedPlayers.length === 0) {
+                alert('Please select players first');
+                return;
+            }
+            selectingCaptain = false;
+            selectingVC = true;
+            showCaptainModal('Select Vice-Captain', 'Vice-Captain gets 1.5x points');
+        }
+        
+        function showCaptainModal(title, desc) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDesc').textContent = desc;
+            
+            const listEl = document.getElementById('modalPlayersList');
+            listEl.innerHTML = selectedPlayers.map(p => `
+                <div style="display: flex; align-items: center; padding: 10px; background: var(--light-gray); border-radius: 8px; margin-bottom: 8px; cursor: pointer;" onclick="setCaptainOrVC('${p.id}')">
+                    <img src="${p.playerImg || 'images/icon-user.webp'}" alt="${p.name}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" onerror="this.src='images/icon-user.webp'">
+                    <span style="flex: 1; font-weight: 600;">${p.name}</span>
+                </div>
+            `).join('');
+            
+            document.getElementById('captainModal').classList.add('active');
+        }
+        
+        function setCaptainOrVC(playerId) {
+            const player = selectedPlayers.find(p => p.id === playerId);
+            if (!player) return;
+            
+            if (selectingCaptain) {
+                if (viceCaptain && viceCaptain.id === playerId) {
+                    viceCaptain = null;
+                }
+                captain = player;
+            } else if (selectingVC) {
+                if (captain && captain.id === playerId) {
+                    captain = null;
+                }
+                viceCaptain = player;
+            }
+            
+            closeModal();
+            updateUI();
+        }
+        
+        function closeModal() {
+            document.getElementById('captainModal').classList.remove('active');
+            selectingCaptain = false;
+            selectingVC = false;
+        }
+        
+        function submitTeam() {
+            if (selectedPlayers.length !== 11 || !captain || !viceCaptain) {
+                alert('Please complete your team selection');
+                return;
+            }
+            
+            // Show success modal
+            document.getElementById('successModal').classList.add('active');
+        }
+        
+        async function fetchMatchInfo() {
+            if (!matchId) {
+                document.getElementById('matchInfoCard').innerHTML = '<p style="text-align: center; padding: 40px;">Match not found. <a href="contests.html" style="color: var(--primary-orange);">Go to Contests</a></p>';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/match_info?apikey=${API_KEY}&id=${matchId}`);
+                const data = await response.json();
+                
+                if (data.status === 'success' && data.data) {
+                    matchData = data.data;
+                    renderMatchInfo();
+                    fetchSquad();
+                } else {
+                    throw new Error('Match not found');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                // Use fallback data from cricScore
+                fetchMatchFromScore();
+            }
+        }
+        
+        async function fetchMatchFromScore() {
+            try {
+                const response = await fetch(`${API_BASE}/cricScore?apikey=${API_KEY}`);
+                const data = await response.json();
+                
+                if (data.status === 'success' && data.data) {
+                    matchData = data.data.find(m => m.id === matchId);
+                    if (matchData) {
+                        renderMatchInfo();
+                        generateDemoPlayers();
+                    } else {
+                        document.getElementById('matchInfoCard').innerHTML = '<p style="text-align: center; padding: 40px;">Match not found. <a href="contests.html" style="color: var(--primary-orange);">Go to Contests</a></p>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        
+        function renderMatchInfo() {
+            const isLive = matchData.ms === 'live' || matchData.matchStarted;
+            const team1Img = matchData.t1img || matchData.teamInfo?.[0]?.img || 'images/default-team.webp';
+            const team2Img = matchData.t2img || matchData.teamInfo?.[1]?.img || 'images/default-team.webp';
+            
+            document.getElementById('matchInfoCard').innerHTML = `
+                <div class="match-teams-header">
+                    <div class="team-header">
+                        <img src="${team1Img}" alt="${matchData.t1 || matchData.teams?.[0]}" onerror="this.src='images/default-team.webp'">
+                        <h3>${matchData.t1 || matchData.teams?.[0] || 'Team 1'}</h3>
+                        ${matchData.t1s || matchData.score?.[0]?.r ? `<div class="score">${matchData.t1s || matchData.score?.[0]?.r + '/' + matchData.score?.[0]?.w}</div>` : ''}
+                    </div>
+                    <div class="vs-badge-large">VS</div>
+                    <div class="team-header">
+                        <img src="${team2Img}" alt="${matchData.t2 || matchData.teams?.[1]}" onerror="this.src='images/default-team.webp'">
+                        <h3>${matchData.t2 || matchData.teams?.[1] || 'Team 2'}</h3>
+                        ${matchData.t2s || matchData.score?.[1]?.r ? `<div class="score">${matchData.t2s || matchData.score?.[1]?.r + '/' + matchData.score?.[1]?.w}</div>` : ''}
+                    </div>
+                </div>
+                <div class="match-status-bar">
+                    <div class="status-item">
+                        <div class="label">Series</div>
+                        <div class="value">${matchData.series || matchData.name || 'Cricket Match'}</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="label">Status</div>
+                        <div class="value">${isLive ? '<span class="live-indicator">🔴 LIVE</span>' : 'Upcoming'}</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="label">Entry</div>
+                        <div class="value" style="color: var(--success);">FREE</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        async function fetchSquad() {
+            try {
+                const response = await fetch(`${API_BASE}/match_squad?apikey=${API_KEY}&id=${matchId}`);
+                const data = await response.json();
+                
+                if (data.status === 'success' && data.data) {
+                    allPlayers = [];
+                    data.data.forEach(team => {
+                        if (team.players) {
+                            team.players.forEach(player => {
+                                allPlayers.push({
+                                    ...player,
+                                    teamName: team.teamName || team.name
+                                });
+                            });
+                        }
+                    });
+                    
+                    if (allPlayers.length === 0) {
+                        generateDemoPlayers();
+                    } else {
+                        renderPlayers();
+                    }
+                } else {
+                    generateDemoPlayers();
+                }
+            } catch (error) {
+                console.error('Error fetching squad:', error);
+                generateDemoPlayers();
+            }
+        }
+        
+        function generateDemoPlayers() {
+            const team1 = matchData?.t1 || matchData?.teams?.[0] || 'Team 1';
+            const team2 = matchData?.t2 || matchData?.teams?.[1] || 'Team 2';
+            
+            const roles = ['Wicket Keeper', 'Batsman', 'Batsman', 'Batsman', 'Batsman', 'All Rounder', 'All Rounder', 'Bowler', 'Bowler', 'Bowler', 'Bowler'];
+            const names1 = ['Player A', 'Player B', 'Player C', 'Player D', 'Player E', 'Player F', 'Player G', 'Player H', 'Player I', 'Player J', 'Player K'];
+            const names2 = ['Player L', 'Player M', 'Player N', 'Player O', 'Player P', 'Player Q', 'Player R', 'Player S', 'Player T', 'Player U', 'Player V'];
+            
+            allPlayers = [];
+            
+            names1.forEach((name, i) => {
+                allPlayers.push({
+                    id: `t1_${i}`,
+                    name: name,
+                    role: roles[i],
+                    teamName: team1,
+                    fantasyPoints: Math.floor(Math.random() * 100) + 50
+                });
+            });
+            
+            names2.forEach((name, i) => {
+                allPlayers.push({
+                    id: `t2_${i}`,
+                    name: name,
+                    role: roles[i],
+                    teamName: team2,
+                    fantasyPoints: Math.floor(Math.random() * 100) + 50
+                });
+            });
+            
+            renderPlayers();
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchMatchInfo();
+        });
+    </script>
+</body>
+</html>
