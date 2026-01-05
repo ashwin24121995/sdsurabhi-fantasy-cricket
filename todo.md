@@ -131,3 +131,39 @@
 - [x] Update homepage to use new images
 - [x] Change stats section to honest non-specific messaging
 - [x] Push changes to GitHub (via checkpoint)
+
+
+## Phase 20: KEMETION PRIVATE LIMITED Rebranding
+
+### New Company Information
+**Company Name:** KEMETION PRIVATE LIMITED  
+**CIN:** U47594JH2023PTC020234  
+**PAN:** AAKCK1332N  
+**TAN:** RCHK02132E  
+**Registered Address:** TANGAR, CHANHO, RANCHI, Tangar, Mandar, Ranchi-835214, Jharkhand  
+**Email Domain:** @kemetionplay.com
+
+### Rebranding Tasks
+- [x] Use user-provided KEMETION logo
+- [x] Replace all "SDSURABHI" references with "KEMETION" (100 occurrences in 14 files)
+- [x] Replace "SDSURABHI INFRA PRIVATE LIMITED" with "KEMETION PRIVATE LIMITED"
+- [x] Update CIN from U41002UP2023PTC194590 to U47594JH2023PTC020234
+- [x] Update all @sdsurabhi.com emails to @kemetionplay.com
+- [x] Update index.html branding
+- [x] Update match.html branding
+- [x] Update contests.html branding
+- [x] Update leaderboard.html branding
+- [x] Update login.html branding
+- [x] Update signup.html branding
+- [x] Update about.html branding
+- [x] Update contact.html branding
+- [x] Update faq.html branding
+- [x] Update how-to-play.html branding
+- [x] Update privacy.html branding
+- [x] Update profile.html branding
+- [x] Update responsible-gaming.html branding
+- [x] Update terms.html branding
+- [x] Replace logo.webp with new KEMETION logo
+- [x] Replace favicon with new KEMETION favicon
+- [ ] Test all pages visually
+- [ ] Push to GitHub
